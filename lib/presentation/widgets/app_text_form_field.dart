@@ -1,7 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:test1/app/utils.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -10,13 +8,17 @@ class AppTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool readOnly;
+  final bool isBig;
+  final TextInputType? keyboardType;
 
   const AppTextFormField({
     super.key,
     required this.hint,
     required this.controller,
+    this.keyboardType,
     this.validator,
     this.readOnly = false,
+    this.isBig = false,
   });
 
   @override
@@ -29,6 +31,7 @@ class AppTextFormField extends StatelessWidget {
           Text(hint),
           TextFormField(
             controller: controller,
+            keyboardType: keyboardType,
             readOnly: readOnly,
             validator: validator,
           ),
@@ -38,6 +41,7 @@ class AppTextFormField extends StatelessWidget {
       return Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 2,
@@ -46,10 +50,31 @@ class AppTextFormField extends StatelessWidget {
           const SizedBox(width: 10,),
           Expanded(
             flex: 5,
-            child: TextFormField(
-              controller: controller,
-              readOnly: readOnly,
-              validator: validator,
+            child: Builder(
+              builder: (context) {
+                if (!isBig){
+                  return TextFormField(
+                    controller: controller,
+                    keyboardType: keyboardType,
+                    readOnly: readOnly,
+                    validator: validator,
+                  );
+                }else {
+                  return SizedBox(
+                    height: 75,
+                    child: TextFormField(
+                      controller: controller,
+                      keyboardType: keyboardType,
+                      textAlignVertical: TextAlignVertical.top,
+                      expands: true,
+                      maxLines: null,
+                      minLines: null,
+                      readOnly: readOnly,
+                      validator: validator,
+                    ),
+                  );
+                }
+              }
             ),
           ),
         ],

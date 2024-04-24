@@ -103,13 +103,17 @@ class AddBranchLandscapeView extends ConsumerWidget {
                     child: AppTextFormField(
                       controller: provider.notesController,
                       hint: 'Notes',
+                      isBig: true,
+                      keyboardType: TextInputType.multiline,
                     ),
                   ),
                   const SizedBox(width: 10,),
                   Expanded(
                     child: AppTextFormField(
                       controller: provider.addressController,
+                      isBig: true,
                       hint: 'Address',
+                      keyboardType: TextInputType.multiline,
                     ),
                   ),
                 ],

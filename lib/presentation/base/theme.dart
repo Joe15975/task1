@@ -48,10 +48,11 @@ class ThemeManager {
   );
 
   static String? getFontFamily() {
-    if (Platform.environment['FLUTTER_TEST'] == 'true') {
-      return null;
-    }else {
-      return 'SomarSans';
-    }
+    // if (Platform.environment['FLUTTER_TEST'] == 'true') {
+    //   return null;
+    // }else {
+    //   return 'SomarSans';
+    // }
+    return 'SomarSans';
   }
 }
