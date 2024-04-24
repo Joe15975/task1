@@ -56,7 +56,7 @@ class AddBranchPortraitView extends ConsumerWidget {
                     child: AppTextFormField(
                       controller: provider.customNoController,
                       hint: 'Custom No.',
-                      readOnly: true,
+                      keyboardType: TextInputType.number,
                     )
                   ),
                 ],

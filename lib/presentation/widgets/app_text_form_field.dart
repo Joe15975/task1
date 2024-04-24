@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:test1/app/utils.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -36,7 +37,11 @@ class AppTextFormField extends StatelessWidget {
             controller: controller,
             keyboardType: keyboardType,
             readOnly: readOnly,
+            enabled: !readOnly,
             validator: validator,
+            inputFormatters: [
+              if (keyboardType == TextInputType.number) FilteringTextInputFormatter.digitsOnly,
+            ],
           ),
         ],
       );
@@ -61,7 +66,11 @@ class AppTextFormField extends StatelessWidget {
                     textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
                     keyboardType: keyboardType,
                     readOnly: readOnly,
+                    enabled: !readOnly,
                     validator: validator,
+                    inputFormatters: [
+                      if (keyboardType == TextInputType.number) FilteringTextInputFormatter.digitsOnly,
+                    ],
                   );
                 }else {
                   return SizedBox(
@@ -75,7 +84,11 @@ class AppTextFormField extends StatelessWidget {
                       maxLines: null,
                       minLines: null,
                       readOnly: readOnly,
+                      enabled: !readOnly,
                       validator: validator,
+                      inputFormatters: [
+                        if (keyboardType == TextInputType.number) FilteringTextInputFormatter.digitsOnly,
+                      ],
                     ),
                   );
                 }
