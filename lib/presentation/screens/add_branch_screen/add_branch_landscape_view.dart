@@ -67,6 +67,7 @@ class AddBranchLandscapeView extends ConsumerWidget {
                     child: AppTextFormField(
                       controller: provider.arabicNameController,
                       hint: 'Arabic Name',
+                      isArabic: true,
                     ),
                   ),
                   const SizedBox(width: 10,),
@@ -74,6 +75,7 @@ class AddBranchLandscapeView extends ConsumerWidget {
                     child: AppTextFormField(
                       controller: provider.arabicDescriptionController,
                       hint: 'Arabic Description',
+                      isArabic: true,
                     ),
                   ),
                 ],

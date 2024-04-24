@@ -65,11 +65,13 @@ class AddBranchPortraitView extends ConsumerWidget {
               AppTextFormField(
                 controller: provider.arabicNameController,
                 hint: 'Arabic Name',
+                isArabic: true,
               ),
               const SizedBox(height: 10,),
               AppTextFormField(
                 controller: provider.arabicDescriptionController,
                 hint: 'Arabic Description',
+                isArabic: true,
               ),
               const SizedBox(height: 10,),
               AppTextFormField(

@@ -9,6 +9,7 @@ class AppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool readOnly;
   final bool isBig;
+  final bool isArabic;
   final TextInputType? keyboardType;
 
   const AppTextFormField({
@@ -19,6 +20,7 @@ class AppTextFormField extends StatelessWidget {
     this.validator,
     this.readOnly = false,
     this.isBig = false,
+    this.isArabic = false,
   });
 
   @override
@@ -30,6 +32,7 @@ class AppTextFormField extends StatelessWidget {
         children: [
           Text(hint),
           TextFormField(
+            textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
             controller: controller,
             keyboardType: keyboardType,
             readOnly: readOnly,
@@ -55,6 +58,7 @@ class AppTextFormField extends StatelessWidget {
                 if (!isBig){
                   return TextFormField(
                     controller: controller,
+                    textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
                     keyboardType: keyboardType,
                     readOnly: readOnly,
                     validator: validator,
@@ -64,6 +68,7 @@ class AppTextFormField extends StatelessWidget {
                     height: 75,
                     child: TextFormField(
                       controller: controller,
+                      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
                       keyboardType: keyboardType,
                       textAlignVertical: TextAlignVertical.top,
                       expands: true,
