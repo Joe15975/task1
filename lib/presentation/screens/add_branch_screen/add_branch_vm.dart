@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:test1/domain/entities/branch.dart';
 import 'package:test1/domain/use-cases/create_branch_uc.dart';
 import 'package:test1/presentation/base/basevm.dart';
 
 import '../../../domain/use-cases/update_branch_uc.dart';
+import '../../base/providers.dart';
 
 class AddBranchVM extends BaseVM implements _AddPersonUI {
 
@@ -52,6 +54,13 @@ class AddBranchVM extends BaseVM implements _AddPersonUI {
           .now()
           .millisecondsSinceEpoch
           .toString();
+
+      arabicNameController.text = '';
+      arabicDescriptionController.text = '';
+      englishNameController.text = '';
+      englishDescriptionController.text = '';
+      notesController.text = '';
+      addressController.text = '';
     }else {
       branchController.text = editBranch!.branch.toString();
       customNoController.text = editBranch!.customNo.toString();
@@ -89,6 +98,58 @@ class AddBranchVM extends BaseVM implements _AddPersonUI {
       await CreateBranchUC(branch: branch).execute();
     }
 
+  }
+
+  void nextPage(WidgetRef ref) {
+    final homeProvider = ref.read(ProviderVM.homeVM);
+    final List<Branch> branches = homeProvider.branches;
+    int index = homeProvider.getBranchIndexByBranchId(int.parse(branchController.text));
+
+    if (index == branches.length - 1) {
+      init(null);
+    } else {
+
+      int indexToGo = index + 1;
+
+      if (branches.length > indexToGo) {
+        init(branches[indexToGo]);
+      }else {
+        init(null);
+      }
+
+    }
+  }
+
+  void previousPage(WidgetRef ref) {
+    final homeProvider = ref.read(ProviderVM.homeVM);
+    final List<Branch> branches = homeProvider.branches;
+    int index = homeProvider.getBranchIndexByBranchId(int.parse(branchController.text));
+
+    if (index == 0) {
+      init(null);
+    } else {
+
+      int indexToGo = index - 1;
+
+      if (indexToGo >= 0) {
+        init(branches[indexToGo]);
+      } else {
+        init(branches.last);
+      }
+
+    }
+  }
+
+  void firstPage(WidgetRef ref) {
+    final homeProvider = ref.read(ProviderVM.homeVM);
+    final List<Branch> branches = homeProvider.branches;
+    init(branches.first);
+  }
+
+  void lastPage(WidgetRef ref) {
+    final homeProvider = ref.read(ProviderVM.homeVM);
+    final List<Branch> branches = homeProvider.branches;
+    init(branches.last);
   }
 
 }

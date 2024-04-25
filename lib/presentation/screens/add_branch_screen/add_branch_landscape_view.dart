@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../base/providers.dart';
 import '../../widgets/app_text_form_field.dart';
+import '../../widgets/page_switcher_widget.dart';
 import 'add_branch_vm.dart';
 
 class AddBranchLandscapeView extends ConsumerWidget {
@@ -19,6 +21,7 @@ class AddBranchLandscapeView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(cnProvider);
+    final homeProvider = ref.read(ProviderVM.homeVM);
 
     return Scaffold(
       appBar: AppBar(
@@ -118,6 +121,24 @@ class AddBranchLandscapeView extends ConsumerWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 50,),
+              PageSwitcherWidget(
+                currentPage: homeProvider.getBranchIndexByBranchId(int.parse(provider.branchController.text)) + 1,
+                totalPages: homeProvider.branches.length,
+                onNextPageClicked: (){
+                  provider.nextPage(ref);
+                },
+                onPreviousPageClicked: (){
+                  provider.previousPage(ref);
+                },
+                onFirstPageClicked: (){
+                  provider.firstPage(ref);
+                },
+                onLastPageClicked: (){
+                  provider.lastPage(ref);
+                },
+              ),
+              const SizedBox(height: 20,),
             ],
           ),
         ),

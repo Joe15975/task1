@@ -39,4 +39,8 @@ class HomeVM extends BaseVM {
     notifyListeners();
   }
 
+  int getBranchIndexByBranchId(int branchId){
+    return branches.indexWhere((element) => element.branch == branchId);
+  }
+
 }

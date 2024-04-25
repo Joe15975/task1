@@ -1,13 +1,12 @@
-
-
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 class ThemeManager {
+
   static final ThemeData themeData = ThemeData(
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xff025faf),
+      backgroundColor: AppColors.primaryColor,
       centerTitle: true,
       iconTheme: IconThemeData(
         color: Colors.white,

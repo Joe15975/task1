@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test1/presentation/widgets/app_text_form_field.dart';
 
+import '../../base/providers.dart';
+import '../../widgets/page_switcher_widget.dart';
 import 'add_branch_vm.dart';
 
 class AddBranchPortraitView extends ConsumerWidget {
@@ -19,6 +21,7 @@ class AddBranchPortraitView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(cnProvider);
+    final homeProvider = ref.read(ProviderVM.homeVM);
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +37,7 @@ class AddBranchPortraitView extends ConsumerWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Form(
           key: provider.formKey,
           child: ListView(
@@ -93,6 +96,24 @@ class AddBranchPortraitView extends ConsumerWidget {
                 controller: provider.addressController,
                 hint: 'Address',
               ),
+              const SizedBox(height: 50,),
+              PageSwitcherWidget(
+                currentPage: homeProvider.getBranchIndexByBranchId(int.parse(provider.branchController.text)) + 1,
+                totalPages: homeProvider.branches.length,
+                onNextPageClicked: (){
+                  provider.nextPage(ref);
+                },
+                onPreviousPageClicked: (){
+                  provider.previousPage(ref);
+                },
+                onFirstPageClicked: (){
+                  provider.firstPage(ref);
+                },
+                onLastPageClicked: (){
+                  provider.lastPage(ref);
+                },
+              ),
+              const SizedBox(height: 20,),
             ],
           ),
         ),
