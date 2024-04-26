@@ -32,8 +32,6 @@ class _BranchDatabase implements BranchDatabaseSource {
   Future<void> initializeDB() async {
 
 
-    String path = '';
-
     String appDocDir = join((await getApplicationDocumentsDirectory()).path, 'databases', );
 
 
@@ -54,7 +52,7 @@ class _BranchDatabase implements BranchDatabaseSource {
     DesktopSQLite.databaseFactory = DesktopSQLite.databaseFactoryFfi;
     final context = Context(style: Style.windows);
 
-    final path = context.join(dir, '${Consts.dbNames.branch}.db');
+    final path = context.join(dir, 'test1','${Consts.dbNames.branch}.db');
 
     try {
       database = await DesktopSQLite.openDatabase(
